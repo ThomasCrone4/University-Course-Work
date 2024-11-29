@@ -25,7 +25,11 @@ def load_graph(args):
 
 def print_stats(graph):
         """Print number of nodes and edges in the given graph"""
-        raise RuntimeError("This function is not implemented yet.")
+        nodes = len(graph)
+        print("Number of nodes: ",nodes)
+        edges = sum(len(targets) for targets in graph.values())
+        print("Number of edges:", edges)
+        
 
 
 def stochastic_page_rank(graph, args):
@@ -77,9 +81,9 @@ if __name__ == '__main__':
 
     graph = load_graph(args)
 
-    """print_stats(graph)
+    print_stats(graph)
 
-    start = time.time()
+    """start = time.time()
     ranking = algorithm(graph, args)
     stop = time.time()
     time = stop - start

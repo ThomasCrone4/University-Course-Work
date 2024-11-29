@@ -14,11 +14,13 @@ def load_graph(args):
     Returns:
     A dict mapling a URL (str) to a list of target URLs (str).
     """
+    graph = {}
     # Iterate through the file line by line
     for line in args.datafile:
         # And split each line into two URLs
         node, target = line.split()
-        raise RuntimeError("This function is not implemented yet.")
+        graph.setdefault(node, []).append(target)
+    return graph
 
 
 def print_stats(graph):
@@ -75,7 +77,7 @@ if __name__ == '__main__':
 
     graph = load_graph(args)
 
-    print_stats(graph)
+    """print_stats(graph)
 
     start = time.time()
     ranking = algorithm(graph, args)
@@ -85,4 +87,4 @@ if __name__ == '__main__':
     top = sorted(ranking.items(), key=lambda item: item[1], reverse=True)
     sys.stderr.write(f"Top {args.number} pages:\n")
     print('\n'.join(f'{100*v:.2f}\t{k}' for k,v in top[:args.number]))
-    sys.stderr.write(f"Calculation took {time:.2f} seconds.\n")
+    sys.stderr.write(f"Calculation took {time:.2f} seconds.\n")"""

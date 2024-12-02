@@ -4,6 +4,8 @@ import time
 import argparse
 from progress import Progress
 
+import random
+
 
 def load_graph(args):
     """Load graph from text file
@@ -46,7 +48,26 @@ def stochastic_page_rank(graph, args):
     a random walk that starts on a random node will after n_steps end
     on each node of the given graph.
     """
-    raise RuntimeError("This function is not implemented yet.")
+    #Initialize the hit count to 0 for each node
+    hit_count = {node: 0 for node in graph}
+
+    #Select a random node
+    current_node = random.choice(list(graph.keys()))
+    hit_count[current_node] += 1
+
+    for i in range(args.steps):
+        if current_node not in graph or len(graph[current_node]) == 0:
+            current_node = random.choice(list(graph.keys()))
+        else: 
+            current_node = random.choice(graph[current_node])
+        hit_count[current_node] += 1
+
+    #Calculate the hit frequency for each node
+    total_hits = sum(hit_count.values())
+    hit_frequency = {node: hits / total_hits for node, hits in hit_count.items()}
+
+    return hit_frequency
+    
 
 
 def distribution_page_rank(graph, args):
@@ -83,7 +104,7 @@ if __name__ == '__main__':
 
     print_stats(graph)
 
-    """start = time.time()
+    start = time.time()
     ranking = algorithm(graph, args)
     stop = time.time()
     time = stop - start
@@ -91,4 +112,4 @@ if __name__ == '__main__':
     top = sorted(ranking.items(), key=lambda item: item[1], reverse=True)
     sys.stderr.write(f"Top {args.number} pages:\n")
     print('\n'.join(f'{100*v:.2f}\t{k}' for k,v in top[:args.number]))
-    sys.stderr.write(f"Calculation took {time:.2f} seconds.\n")"""
+    sys.stderr.write(f"Calculation took {time:.2f} seconds.\n")

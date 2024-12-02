@@ -83,7 +83,16 @@ def distribution_page_rank(graph, args):
     This function estimates the Page Rank by iteratively calculating
     the probability that a random walker is currently on any node.
     """
-    raise RuntimeError("This function is not implemented yet.")
+
+    node_prob = {node: 1/len(graph) for node in graph}
+    for i in range(args.repeats):
+        next_prob = {node: 0 for node in graph}
+        for node, targets in graph.items():
+            for target in targets:
+                next_prob[target] += node_prob[node] / len(targets)
+        node_prob = next_prob
+    return node_prob
+    
 
 
 parser = argparse.ArgumentParser(description="Estimates page ranks from link information")

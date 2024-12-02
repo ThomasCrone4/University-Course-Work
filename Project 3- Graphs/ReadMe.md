@@ -25,6 +25,6 @@ This project is my course work for my Programming Project 1034 course at Newcast
 
 
 ## License
-This project is owned by Newcastle University. See the LICENSE file for details.
+This project is owned by Newcastle University. See the LICENSE.md file for details.
 
 

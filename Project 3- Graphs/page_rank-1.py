@@ -57,10 +57,10 @@ def stochastic_page_rank(graph, args):
 
     for i in range(args.steps):
         if current_node not in graph or len(graph[current_node]) == 0:
-            current_node = random.choice(list(graph.keys()))
+            current_node = random.choice(list(graph.keys())) #If the current node has no targets, select a random node
         else: 
-            current_node = random.choice(graph[current_node])
-        hit_count[current_node] += 1
+            current_node = random.choice(graph[current_node]) #Select a random target node
+        hit_count[current_node] += 1 
 
     #Calculate the hit frequency for each node
     total_hits = sum(hit_count.values())
@@ -90,13 +90,14 @@ def distribution_page_rank(graph, args):
             sys.stderr.write("Repeats for distribution page rank must no more than 5,000, use command: -r 5000 \n")
             args.repeats = 5000
             
+    #Initialize the probability for each node
     node_prob = {node: 1/len(graph) for node in graph}
     for i in range(args.repeats):
-        next_prob = {node: 0 for node in graph}
-        for node, targets in graph.items():
-            for target in targets:
+        next_prob = {node: 0 for node in graph} 
+        for node, targets in graph.items(): 
+            for target in targets: #Calculate the probability for each node
                 next_prob[target] += node_prob[node] / len(targets)
-        node_prob = next_prob
+        node_prob = next_prob #Update the probability for each node
     return node_prob
     
 

@@ -84,6 +84,12 @@ def distribution_page_rank(graph, args):
     the probability that a random walker is currently on any node.
     """
 
+    #If distribution repeats a lot, algorithm takes a long time to run
+    if algorithm == distribution_page_rank:
+        if args.repeats > 5000:
+            sys.stderr.write("Repeats for distribution page rank must no more than 5,000, use command: -r 5000 \n")
+            args.repeats = 5000
+            
     node_prob = {node: 1/len(graph) for node in graph}
     for i in range(args.repeats):
         next_prob = {node: 0 for node in graph}

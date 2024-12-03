@@ -7,12 +7,12 @@ This project is my course work for my Programming Project 1034 course at Newcast
 - Stochastic PageRank estimation
 - Probabilistic PageRank estimation
 
-
-
 ## Usage
 1. Ensure you are using the correct project directory:
     ```bash
     cd "Local folder location of project"
+
+    I use  cd "C:\Users\thoma\OneDrive - Newcastle University\Course work\Programming Project 1034\University-Course-Work\Project 3- Graphs"
     ```
 2. Run the main script:
     ```bash
@@ -22,7 +22,6 @@ This project is my course work for my Programming Project 1034 course at Newcast
     ```bash
     python page_rank-1.py -h
     ```
-
 
 ## License
 This project is owned by Newcastle University. See the LICENSE.md file for details.
